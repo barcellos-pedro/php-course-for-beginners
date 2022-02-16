@@ -104,6 +104,7 @@
  // Sort of array
  echo '<pre>';
  echo "Sort \n";
+ sort($fruits);
  var_dump($fruits);
  echo '</pre>';
 
