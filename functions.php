@@ -43,7 +43,14 @@
     return array_reduce($numbers, fn($acc, $next) => $acc + $next, 0);
  }
 
+ function joinString(...$string)
+ {
+    return array_reduce($string, fn($acc, $next) => $acc . $next, '');
+ }
+
  $sumResult = sumNumbers(1, 2, 3);
- echo "Sum of numbers $sumResult";
+ echo "Sum of numbers $sumResult <br>";
+
+ echo "Join function: " . joinString('P', 'e', 'd', 'r', 'o');
 
 ?>
