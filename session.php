@@ -9,10 +9,6 @@
  // We need to initialize before the html
  session_start();
 
- echo '<pre>';
- var_dump($_SESSION);
- echo '</pre>';
-
  // Page counter
 //  if (isset($_SESSION['counter'])) {
 //     $_SESSION['counter']++;
@@ -21,8 +17,12 @@
 //  }
 
  // Short syntax
- $_SESSION['counter'] ??= 0;
- $_SESSION['counter']++;
+ $_SESSION['page_views'] ??= 0;
+ $_SESSION['page_views']++;
+
+ echo '<pre>';
+ var_dump($_SESSION);
+ echo '</pre>';
 
 ?>
 <!DOCTYPE html>
@@ -34,7 +34,7 @@
     <title>Sessions</title>
 </head>
 <body>
-    <h1>Sessions & Cookies</h1>
-    <p>You have visited this page: <?php echo $_SESSION['counter'] ?> times</p>
+    <h1>Sessions</h1>
+    <p>You have visited this page: <?php echo $_SESSION['page_views'] ?> times</p>
 </body>
 </html>
