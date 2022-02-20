@@ -31,7 +31,7 @@ if (file_exists($fileName)) {
     <div class="todo">
         <?php foreach($todos as $key => $todo): ?>
             <div class="todo-item" style="margin: 1em 0;">
-                <p style="<?= $todo['completed'] ? 'text-decoration: line-through' : 'none' ?>">
+                <p style="<?= $todo['completed'] ? 'text-decoration: line-through' : '' ?>">
                     <?= $todo['task'] ?>
                 </p>
                 <div class="actions" style="display: flex; align-items: baseline; gap: 1em; margin-top: 8px;">
