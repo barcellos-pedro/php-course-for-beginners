@@ -1,13 +1,13 @@
 <?php
 
 include '../my-log.php';
+require './todo-helper.php';
 
 $fileName = 'todos.json';
 $todos = [];
 
 if (file_exists($fileName)) {
-    $fileContent = file_get_contents($fileName);
-    $todos = json_decode($fileContent, true);
+    $todos = getTodos();
 }
 
 // myLog($todos);

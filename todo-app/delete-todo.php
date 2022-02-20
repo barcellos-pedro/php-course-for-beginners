@@ -1,12 +1,11 @@
 <?php
 
+require './todo-helper.php';
 require '../my-log.php';
 
 myLog($_POST);
 
-$fileName = 'todos.json';
-$fileContent = file_get_contents($fileName);
-$todos = json_decode($fileContent, true);
+$todos = getTodos();
 
 $todoKey = $_POST['todo_name'];
 $todoToDelete = $todos[$todoKey];
@@ -18,8 +17,7 @@ if ($todoToDelete && in_array($todoToDelete, $todos)) {
     // Removes 1 todo
     array_splice($todos, $indexToDelete, 1);
     
-    $todosJson = json_encode($todos, JSON_PRETTY_PRINT);
-    file_put_contents($fileName, $todosJson);
+    saveTodos($todos);
 
     header('Location: index.php');
 } else {
