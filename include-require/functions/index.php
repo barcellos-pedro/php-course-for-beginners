@@ -13,11 +13,13 @@
     <h1>Include/Require Functions</h1>
     <?php
         $add_result = operations(2, 3, 'add');
-        $subtract_result = operations(2, 3, 'add');
+        $subtract_result = operations(3, 2, 'subtract');
+        $multiply_result = operations(2, 2, 'multiply');
         $divide_result = operations(10, 5, 'divide');
 
         echo "Add: $add_result <br>";
         echo "Subtract: $subtract_result <br>";
+        echo "Multiply: $multiply_result <br>";
         echo "Divide: $divide_result <br>";
     ?>
 </body>

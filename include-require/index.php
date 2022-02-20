@@ -9,7 +9,7 @@
  * it will not be required/include
  */
 
-include('partials/header.php');
+include 'partials/header.php';
 ?>
 
 <?php $year = date('Y'); ?>
