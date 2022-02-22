@@ -5,10 +5,11 @@ require_once './Note.php';
 include_once '../my-log.php';
 include_once '../get-post-data.php';
 
-// myLog($_POST);
+myLog($_POST);
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST')
 {
+    $id = (int)get_post_data('id');
     $title = get_post_data('title');
     $description = get_post_data('description');
 
@@ -20,13 +21,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
 
     try {
         $connection = Connection::getConnection();
-    } catch (PDOException $e) {
-        echo 'ERROR: ' . $e->getMessage();
+    } catch (PDOException $error) {
+        echo 'ERROR: ' . $error->getMessage();
     }
 
-    $note = new Note($title, $description);
-
-    $connection->saveNote($note);
+    // Update note based on the 'id'
+    if ($id) {
+        $connection->updateNote($id, $title, $description);
+    } else {
+        // Create if there is no 'id' to update
+        $connection->saveNote(new Note($title, $description));
+    }
 
     header('Location: index.php');
 }

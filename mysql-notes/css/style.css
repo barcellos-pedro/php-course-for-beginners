@@ -9,7 +9,7 @@
     box-sizing: border-box;
 }
 
-h1 {
+h1, h2 {
     text-align: center;
     color: var(--jet);
     font-family: 'Brush Script MT', cursive;
@@ -21,6 +21,11 @@ form {
     justify-content: center;
     align-items: center;
     gap: 1em;
+}
+
+img {
+    height: 13px;
+    width: 13px;
 }
 
 input,

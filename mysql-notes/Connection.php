@@ -42,6 +42,15 @@ class Connection
         return $statement->fetchALL(PDO::FETCH_ASSOC);
     }
 
+    public function getNoteById(int $id)
+    {
+        $statement = $this->query("SELECT id, title, description, created_at FROM notes where id = :id");
+        $statement->bindValue('id', $id);
+        $statement->execute();
+        return $statement->fetch(PDO::FETCH_ASSOC);
+
+    }
+
     public function saveNote(Note $note) : bool
     {
         $statement = $this->query(
@@ -54,10 +63,25 @@ class Connection
         return $statement->execute();
     }
 
-    public function deleteNote(int $id)
+    public function updateNote(int $id, string $title, string $description) : bool
+    {
+        $statement = $this->query(
+            "UPDATE notes SET title = :title, description = :description WHERE id = :id"
+        );
+
+        $statement->bindValue('id', $id);
+        $statement->bindValue('title', $title);
+        $statement->bindValue('description', $description);
+
+        return $statement->execute();
+    }
+
+    public function deleteNote(int $id) : bool
     {
         $statement = $this->query("DELETE FROM notes where id = ?");
-        $statement->execute([$id]);
+        
+        // bindValue by args position
+        return $statement->execute([$id]);
     }
 }
 

@@ -2,7 +2,7 @@
 
 require_once './Connection.php';
 include_once '../my-log.php';
-include_once '../get-post-data.php';
+require_once '../get-post-data.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST')
 {
@@ -12,8 +12,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
 
     try {
         $connection = Connection::getConnection();
-    } catch (PDOException $e) {
-        echo 'ERROR: ' . $e->getMessage();
+    } catch (PDOException $error) {
+        echo 'ERROR: ' . $error->getMessage();
     }
 
     $connection->deleteNote($id);
