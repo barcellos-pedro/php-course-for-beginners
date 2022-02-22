@@ -1,13 +1,18 @@
 :root {
     --blue: #4848ea;
-    --honeydew: #E0EFDE;
-    --lavender: #A882DD;
+    --honeydew: #e0efde;
+    --lavender: #a882dd;
     --jet: #2f2f2f;
+}
+
+* {
+    box-sizing: border-box;
 }
 
 h1 {
     text-align: center;
     color: var(--jet);
+    font-family: 'Brush Script MT', cursive;
 }
 
 form {
@@ -18,7 +23,8 @@ form {
     gap: 1em;
 }
 
-input, textarea {
+input,
+textarea {
     width: 50%;
     padding: 1em;
     border: none;
@@ -38,7 +44,7 @@ input, textarea {
 }
 
 .new-note::before {
-    content: '';
+    content: "";
     position: absolute;
     width: 100%;
     height: 100%;
@@ -69,6 +75,13 @@ input, textarea {
     border-radius: 5px;
     background-color: var(--honeydew);
     padding: 1em;
+    margin: 1em 0;
+    border: 1px solid transparent;
+    transition: 300ms all;
+}
+
+.card:hover {
+    border: 1px solid var(--blue);
 }
 
 .card-header {
@@ -79,10 +92,14 @@ input, textarea {
 .card-header button {
     border: none;
     background: transparent;
+    border: 1px solid transparent;
+    transition: 300ms all;
 }
 
 .card-header button:hover {
     cursor: pointer;
+    border: 1px solid black;
+    border-radius: 5px;
 }
 
 .card-header a {

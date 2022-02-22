@@ -1,11 +1,11 @@
 <?php
 
 require_once './Connection.php';
-require_once '../my-log.php';
+include_once '../my-log.php';
 
 try {
-    $connection = new Connection();
-} catch(PDOException $e) {
+    $connection = Connection::getConnection();
+} catch (PDOException $e) {
     echo 'ERROR: ' . $e->getMessage();
 }
 
@@ -22,7 +22,7 @@ $notes = $connection->getNotes();
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
-        <?php require 'css/style.css'; ?>
+        <?php require_once 'css/style.css'; ?>
     </style>
     <title>MySQL Notes</title>
 </head>
@@ -30,27 +30,29 @@ $notes = $connection->getNotes();
 <body>
     <h1>MySQL Notes</h1>
     <main>
-        <form action="" method="post">
+        <form action="create-note.php" method="post">
             <input type="text" name="title" id="title" placeholder="Note title">
             <textarea name="description" id="description" cols="30" rows="4" placeholder="Note description"></textarea>
             <button type="submit" class="new-note" title="Add new note">New note</button>
         </form>
         <div class="notes">
-
-        <?php foreach($notes as $index => $note): ?>
-            <div class="card">
-                <div class="card-header">
-                    <a href="#"><?= $note['title'] ?></a>
-                    <button title="Close">X</button>
+            <?php foreach ($notes as $note) : ?>
+                <div class="card">
+                    <div class="card-header">
+                        <a href="edit-note.app" title="Edit note"><?= $note['title'] ?></a>
+                        <form action="delete-note.php" method="post" style="display: inline-block;">
+                            <input type="hidden" name="id" value="<?= $note['id'] ?>">
+                            <button type="submit" title="Delete note">X</button>
+                        </form>
+                    </div>
+                    <div class="card-body">
+                        <p><?= $note['description'] ?></p>
+                    </div>
+                    <div class="card-footer">
+                        <small><?= $note['created_at'] ?></small>
+                    </div>
                 </div>
-                <div class="card-body">
-                    <p><?= $note['description'] ?></p>
-                </div>
-                <div class="card-footer">
-                    <small><?= $note['created_at'] ?></small>
-                </div>
-            </div>
-        <?php endforeach; ?>
+            <?php endforeach; ?>
         </div>
     </main>
 </body>

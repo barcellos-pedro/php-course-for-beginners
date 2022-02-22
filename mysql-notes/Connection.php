@@ -1,5 +1,7 @@
 <?php
 
+require_once './Note.php';
+
 class Connection
 {
     private PDO $pdo;
@@ -7,29 +9,55 @@ class Connection
     public function __construct()
     {
         // PDO
-        $pdo = new PDO(
+        $this->pdo = new PDO(
             'mysql:host=localhost;dbname=mysqlnotes',
             'pedro',
             'Pedromudar@100'
         );
         
         // Every time something goes wrong with databse, we will throw an exception
-        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-        $this->pdo = $pdo;
+        $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     }
 
-    public function getNotes()
+    public static function getConnection() : Connection {
+        return new Connection();
+    }
+
+    /**
+     * Returns pdo ready to execute some query
+     */
+    private function query($query) : PDOStatement|false
+    {
+        return $this->pdo->prepare($query);
+    }
+
+    public function getNotes() : array
     {
         // Prepare the query
-        $statement = $this->pdo->prepare(
-            "SELECT * FROM notes ORDER BY created_at DESC"
-        );
+        $statement = $this->query("SELECT * FROM notes ORDER BY created_at DESC");
 
         $statement->execute();
 
         // Return result as an associative array
         return $statement->fetchALL(PDO::FETCH_ASSOC);
+    }
+
+    public function saveNote(Note $note) : bool
+    {
+        $statement = $this->query(
+            "INSERT INTO notes (title, description) VALUES (:title, :description)"
+        );
+
+        $statement->bindValue('title', $note->title);
+        $statement->bindValue('description', $note->description);
+
+        return $statement->execute();
+    }
+
+    public function deleteNote(int $id)
+    {
+        $statement = $this->query("DELETE FROM notes where id = ?");
+        $statement->execute([$id]);
     }
 }
 
