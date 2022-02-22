@@ -1,0 +1,95 @@
+:root {
+    --blue: #4848ea;
+    --honeydew: #E0EFDE;
+    --lavender: #A882DD;
+    --jet: #2f2f2f;
+}
+
+h1 {
+    text-align: center;
+    color: var(--jet);
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1em;
+}
+
+input, textarea {
+    width: 50%;
+    padding: 1em;
+    border: none;
+    outline: none;
+    border-bottom: 1px solid black;
+}
+
+.new-note {
+    position: relative;
+    padding: 15px 35px;
+    border-radius: 8px;
+    background-color: transparent;
+    border: 1px solid var(--blue);
+    color: var(--blue);
+    transition: 500ms all;
+    overflow: hidden;
+}
+
+.new-note::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    transform: translateY(+50px);
+    background-color: var(--blue);
+    z-index: -1;
+}
+
+.new-note:hover {
+    color: white;
+    cursor: pointer;
+}
+
+.new-note:hover::before {
+    transition: 500ms all;
+    transform: translateY(0px);
+}
+
+.notes {
+    width: 50%;
+    margin: 1em auto 0;
+}
+
+.card {
+    width: 100%;
+    border-radius: 5px;
+    background-color: var(--honeydew);
+    padding: 1em;
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.card-header button {
+    border: none;
+    background: transparent;
+}
+
+.card-header button:hover {
+    cursor: pointer;
+}
+
+.card-header a {
+    color: var(--lavender);
+}
+
+.card-footer {
+    display: flex;
+    justify-content: flex-end;
+}
