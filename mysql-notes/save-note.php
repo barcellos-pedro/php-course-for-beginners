@@ -5,7 +5,7 @@ require_once './Note.php';
 include_once '../my-log.php';
 include_once '../get-post-data.php';
 
-myLog($_POST);
+// myLog($_POST);
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST')
 {
