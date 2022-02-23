@@ -1,0 +1,2 @@
+[2022-02-22T21:29:40.364167-03:00] log.WARNING: Some warning [] []
+[2022-02-22T21:30:20.477395-03:00] log.ERROR: Some error {"type":"test"} []
